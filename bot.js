@@ -27,7 +27,8 @@ bot.on('message', ctx => {
   }
 });
 
-bot.launch();
+// bot.launch();
+bot.startWebhook('/tgCallback', null, process.env.PORT);
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
