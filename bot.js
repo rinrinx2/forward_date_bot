@@ -10,6 +10,7 @@ bot.start(ctx =>
 );
 
 bot.on('message', ctx => {
+  console.log('message got');
   if (ctx.message.forward_date) {
     const date = new Date(ctx.message.forward_date * 1000);
     const day = date.getDate();
