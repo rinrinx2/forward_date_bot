@@ -1,9 +1,7 @@
-// require('dotenv').config();
+require('dotenv').config();
 
-const express = require('express');
 const { Telegraf } = require('telegraf');
 
-const port = process.env.PORT;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start(ctx =>
@@ -34,13 +32,3 @@ bot.launch();
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
-
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
