@@ -1,0 +1,20 @@
+{
+  "name": "forward_date_bot",
+  "version": "1.0.0",
+  "description": "A tiny bot to get the date of forwarded message",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot",
+    "dev": "nodemon ."
+  },
+  "repository": "git@github.com:bogdanbryzh-official/forward_date_bot.git",
+  "author": "Bogdan Bryzh <bogdan.bryzh@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "telegraf": "^4.3.0"
+  }
+}
