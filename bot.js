@@ -10,15 +10,14 @@ bot.start(ctx =>
 );
 
 bot.on('message', ctx => {
-  console.log('message got');
   if (ctx.message.forward_date) {
     const date = new Date(ctx.message.forward_date * 1000);
     const day = date.getDate();
     const month = date.toLocaleString('default', { month: 'long' });
     const year = date.getFullYear();
     const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+    const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+    const minutes = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
     const message_id = ctx.message.message_id;
     ctx.reply(`${day} ${month} ${year} ${hours}:${minutes}:${seconds}`, {
       reply_to_message_id: message_id,
