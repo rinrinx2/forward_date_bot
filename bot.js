@@ -19,7 +19,7 @@ bot.on('message', ctx => {
     const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
     const seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
     const message_id = ctx.message.message_id;
-    ctx.reply(`${day} ${month} ${year} ${hours}:${minutes}:${seconds}`, {
+    ctx.reply(`${hours}:${minutes}:${seconds} UTC ${day} ${month} ${year}`, {
       reply_to_message_id: message_id,
     });
   } else {
