@@ -13,7 +13,10 @@ bot.start(ctx =>
 
 bot.on('message', ctx => {
   countapi.hit('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
-    bot.telegram.sendMessage(835930952, 'One more used it ;)');
+    bot.telegram.sendMessage(
+      835930952,
+      `One more used it ;)\n ${result.value} times already used`
+    );
   });
 
   if (ctx.message.forward_date) {
