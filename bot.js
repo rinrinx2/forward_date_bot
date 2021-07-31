@@ -12,6 +12,14 @@ bot.start(ctx =>
   Forward me a message and I will tell you when it was sent 👀`)
 );
 
+bot.command('used', ctx => {
+  getCounter('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
+    if (result.status === 200) {
+      return bot.telegram.sendMessage(adminUser, `${result.value}`);
+    }
+  });
+});
+
 bot.on('message', ctx => {
   hitUseCounter('bogdanbryzh.me', 'forward_message_bot_sends').then();
 
@@ -32,14 +40,6 @@ bot.on('message', ctx => {
   } else {
     ctx.reply('Pleeeease forward not send ☺️');
   }
-});
-
-bot.command('used', ctx => {
-  getCounter('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
-    if (result.status === 200) {
-      return bot.telegram.sendMessage(adminUser, `${result.value}`);
-    }
-  });
 });
 
 bot.launch({
