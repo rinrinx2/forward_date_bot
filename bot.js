@@ -22,8 +22,8 @@ bot.command('used', async () => {
   }
 });
 
-bot.on('message', ctx => {
-  hitUseCounter('bogdanbryzh.me', 'forward_message_bot_sends').then();
+bot.on('message', async ctx => {
+  await hitUseCounter('bogdanbryzh.me', 'forward_message_bot_sends');
 
   if (ctx.message.forward_date) {
     const date = new Date(ctx.message.forward_date * 1000);
