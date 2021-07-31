@@ -12,14 +12,12 @@ bot.start(ctx =>
 );
 
 bot.on('message', ctx => {
-  hitUseCounter
-    .hit('bogdanbryzh.me', 'forward_message_bot_sends')
-    .then(result => {
-      bot.telegram.sendMessage(
-        835930952,
-        `One more used it ;)\n ${result.value} times already used`
-      );
-    });
+  hitUseCounter('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
+    bot.telegram.sendMessage(
+      835930952,
+      `One more used it ;)\n ${result.value} times already used`
+    );
+  });
 
   if (ctx.message.forward_date) {
     const date = new Date(ctx.message.forward_date * 1000);
