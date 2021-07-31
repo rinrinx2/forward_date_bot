@@ -1,9 +1,10 @@
 import { config } from 'dotenv';
 config();
-import { hit as hitUseCounter } from 'countapi-js';
+import { hit as hitUseCounter, get as getCounter } from 'countapi-js';
 import { Telegraf } from 'telegraf';
 
 const port = process.env.PORT || 3000;
+const adminUser = process.env.ADMIN_USER;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start(ctx =>
@@ -12,12 +13,7 @@ bot.start(ctx =>
 );
 
 bot.on('message', ctx => {
-  hitUseCounter('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
-    bot.telegram.sendMessage(
-      835930952,
-      `One more used it ;)\n ${result.value} times already used`
-    );
-  });
+  hitUseCounter('bogdanbryzh.me', 'forward_message_bot_sends').then();
 
   if (ctx.message.forward_date) {
     const date = new Date(ctx.message.forward_date * 1000);
@@ -36,6 +32,14 @@ bot.on('message', ctx => {
   } else {
     ctx.reply('Pleeeease forward not send ☺️');
   }
+});
+
+bot.command('used', ctx => {
+  getCounter('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
+    if (result.status === 200) {
+      return bot.telegram.sendMessage(adminUser, `${result.value}`);
+    }
+  });
 });
 
 bot.launch({
