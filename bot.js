@@ -3,6 +3,7 @@ config();
 import { hit as hitUseCounter } from 'countapi-js';
 import { Telegraf } from 'telegraf';
 
+const port = process.env.PORT || 3000;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start(ctx =>
@@ -41,8 +42,8 @@ bot.on('message', ctx => {
 
 bot.launch({
   webhook: {
-    domain: 'https://myaddress.com',
-    port: 4000,
+    domain: 'https://forward-date-bot.herokuapp.com/',
+    port: port,
   },
 });
 // Enable graceful stop
