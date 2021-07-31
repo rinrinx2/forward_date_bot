@@ -1,8 +1,7 @@
-require('dotenv').config();
-
-const countapi = require('countapi-js');
-
-const { Telegraf } = require('telegraf');
+import { config } from 'dotenv';
+config();
+import { hit as hitUseCounter } from 'countapi-js';
+import { Telegraf } from 'telegraf';
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -12,12 +11,14 @@ bot.start(ctx =>
 );
 
 bot.on('message', ctx => {
-  countapi.hit('bogdanbryzh.me', 'forward_message_bot_sends').then(result => {
-    bot.telegram.sendMessage(
-      835930952,
-      `One more used it ;)\n ${result.value} times already used`
-    );
-  });
+  hitUseCounter
+    .hit('bogdanbryzh.me', 'forward_message_bot_sends')
+    .then(result => {
+      bot.telegram.sendMessage(
+        835930952,
+        `One more used it ;)\n ${result.value} times already used`
+      );
+    });
 
   if (ctx.message.forward_date) {
     const date = new Date(ctx.message.forward_date * 1000);
@@ -38,7 +39,12 @@ bot.on('message', ctx => {
   }
 });
 
-bot.launch();
+bot.launch({
+  webhook: {
+    domain: 'https://myaddress.com',
+    port: 4000,
+  },
+});
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
